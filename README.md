@@ -24,9 +24,7 @@ Using a **ResNet-50** classifier trained on **39k+ galaxy images**, we quantify 
 
 - **Bias Measurement (Bias2014 + Bias2018):**  
   Implemented bin-variance and KL-divergence metrics to detect labeling bias w.r.t.  
-  \[
-  \alpha = \frac{r_{\text{angular}}}{\text{PSF}}
-  \]
+  $\alpha = r_{\text{angular}} / \text{PSF}$
   revealing strong resolution-dependent misclassification patterns.
 
 - **Observed vs. Intrinsic Distributions:**  
@@ -45,9 +43,7 @@ Detailed scientific context is provided in:
 
 - **Revised Loss Function:**  
   Implemented a bias-aware likelihood term:
-  \[
-  \mathcal{L} = -\log p(\tilde{y}\mid y, \alpha) - \log p(y\mid x, w)
-  \]
+  $\mathcal{L} = -\log p(\tilde{y}\mid y, \alpha) - \log p(y\mid x, w)$
   allowing the CNN to discount misleading low-resolution labels.
 
 - **Bias Reduction:**  
