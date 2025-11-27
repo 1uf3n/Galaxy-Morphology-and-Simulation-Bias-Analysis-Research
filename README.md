@@ -1,68 +1,95 @@
-# Galaxy-Morphology-and-Simulation-Bias-Analysis-Research
+# Galaxy Morphology and Simulation Bias Analysis Research
 
-\section*{PROJECT OVERVIEW}
-\subsection*{Trustworthy AI for Galaxy Morphology Classification and Bias Mitigation}
+## PROJECT OVERVIEW
 
-This repository contains the codebase, datasets, and evaluation pipeline for a research project conducted in the University of Michigan’s Department of Astronomy. The work focuses on developing a trustworthy AI framework for galaxy morphology classification, quantifying labeling bias, and correcting resolution-driven distortions in astronomical datasets.
+### Trustworthy AI for Galaxy Morphology Classification and Bias Mitigation
 
-The project leverages a ResNet-50 convolutional neural network to classify more than 39,000 galaxy images (spiral vs.\ elliptical), identifies systematic biases in human-provided labels, and applies modified deep-learning loss functions to mitigate these biases. Using both real and simulated galaxies, the project improves classification consistency and enhances fairness across varying observational conditions.
+This repository contains the full codebase, datasets, and evaluation pipeline for a research project conducted at the **University of Michigan – Department of Astronomy**. The project develops a framework for **trustworthy AI in astronomy**, focused on:
 
-\section*{TASKS}
+- classifying galaxy morphologies from imaging data,
+- identifying systematic labeling bias,
+- mitigating resolution-driven distortions,
+- validating performance using real and simulated galaxies.
 
-\subsection*{1. Galaxy Classification + Bias Quantification}
+Using a **ResNet-50** classifier trained on **39k+ galaxy images**, we quantify how human-provided labels vary as a function of angular size, PSF, and resolution. A modified loss function integrates a probabilistic bias model, enabling significant bias reduction across observational regimes.
 
-\subsubsection*{Key Points}
+---
 
-\begin{itemize}
-    \item \textbf{Galaxy Morphology Classification:} Trained a ResNet-50 model on 39k+ galaxy images, achieving over 80\% accuracy. Analyzed training/validation behavior using learning curves and activation maps.
-    \item \textbf{Bias Measurement:} Implemented Bias2014 (bin-variance) and Bias2018 (KL-divergence) to quantify how image resolution, angular size, and PSF influence human-labeled classifications.
-    \item \textbf{Resolution-Driven Bias:} Identified strong bias patterns where distant, low-resolution spiral galaxies are mislabeled as featureless ellipticals.
-    \item \textbf{Visualization:} Generated ROC curves, PR curves, accuracy–bias tradeoff plots, and Grad-CAM interpretability heatmaps.
-\end{itemize}
+## TASKS
+### Galaxy Classification + Bias Quantification
 
-Detailed background and scientific context are provided in the MIDAS Summit presentation and NSF proposal included in this repository.
+- **Galaxy Morphology Classification:**  
+  Trained a ResNet-50 CNN achieving **80%+ accuracy** on spiral vs. elliptical classification.  
+  Includes tools for learning curves, ROC/PR evaluation, and Grad-CAM interpretability.
 
-\subsection*{2. Debiasing Framework}
+- **Bias Measurement (Bias2014 + Bias2018):**  
+  Implemented bin-variance and KL-divergence metrics to detect labeling bias w.r.t.  
+  \[
+  \alpha = \frac{r_{\text{angular}}}{\text{PSF}}
+  \]
+  revealing strong resolution-dependent misclassification patterns.
 
-\subsubsection*{Key Points}
+- **Observed vs. Intrinsic Distributions:**  
+  Quantified labeling drift across bins of physical size, luminosity, and redshift.
 
-\begin{itemize}
-    \item \textbf{Modified Loss Function:} Incorporated a probabilistic bias-likelihood term into the CNN loss, enabling the model to discount misleading biased labels.
-    \item \textbf{Bias Reduction:} Achieved approximately 65\% reduction in resolution-driven labeling bias compared to the baseline CNN model.
-    \item \textbf{Improved Model Consistency:} Enhanced classification stability by more than 20\% across varying observational regimes using both real and simulated galaxies.
-    \item \textbf{Validation Pipeline:} Built a GPU-accelerated simulation pipeline using 100k+ synthetic galaxies to verify classifier robustness.
-\end{itemize}
+- **Visualization Tools:**  
+  Bias–accuracy sweeps, PR/ROC curves, learning curves, activation maps.
 
-\subsection*{3. Repository Contents}
+Detailed scientific context is provided in:  
+- **MIDAS Summit Presentation**  
+- **NSF AAG 2023 Proposal**
 
-\subsubsection*{Includes:}
+---
 
-\begin{itemize}
-    \item CNN training scripts for baseline and debiased models
-    \item Bias computation tools (sweeps, metrics, statistical summaries)
-    \item Visualization scripts (ROC, PR, tradeoff curves, learning curves)
-    \item Activation map and interpretability utilities (Grad-CAM)
-    \item Simulation validation scripts
-    \item Data preprocessing and filtering tools
-    \item Intermediate outputs (CSV, logs, PDF figures)
-\end{itemize}
+### Debiasing Framework
 
-\section*{SCIENTIFIC IMPACT}
+- **Revised Loss Function:**  
+  Implemented a bias-aware likelihood term:
+  \[
+  \mathcal{L} = -\log p(\tilde{y}\mid y, \alpha) - \log p(y\mid x, w)
+  \]
+  allowing the CNN to discount misleading low-resolution labels.
 
-This repository contributes to the emerging domain of \emph{trustworthy AI for astronomy}, enabling:
-\begin{itemize}
-    \item systematic identification of human labeling biases,
-    \item principled debiasing of deep-learning models,
-    \item improved morphological classification accuracy under varied observational conditions,
-    \item scalable frameworks for mapping imaging pixels to astrophysical properties.
-\end{itemize}
+- **Bias Reduction:**  
+  Achieved **$\sim 65\%$ decrease** in resolution-driven labeling bias.
 
-The techniques also generalize to other remote-sensing fields where expert labels contain hidden systematic bias.
+- **Consistency Improvement:**  
+  Classification stability improves **$\sim 20\%$** when evaluated on multi-resolution simulations.
 
-\section*{CONTACT}
+- **Simulation-Based Validation:**  
+  GPU-accelerated pipeline with **100k+ synthetic galaxies** to stress-test debiased models.
 
-For questions regarding methodology, reproducibility, or collaboration:
-\begin{itemize}
-    \item University of Michigan -- Department of Astronomy
-    \item Galaxy Morphology \& Simulation Bias Group
-\end{itemize}
+---
+
+## REPOSITORY CONTENTS
+
+- CNN training scripts (baseline + debiased)
+- Bias metric computation tools  
+- Accuracy–bias sweep visualizers  
+- ROC, PR, learning curve generators  
+- Grad-CAM activation map utilities  
+- Simulation comparison tools  
+- Dataset filtering + preprocessing pipelines  
+- Intermediate outputs (CSVs, logs, PDFs)
+
+---
+
+## SCIENTIFIC IMPACT
+
+This work contributes to the broader effort to develop **trustworthy AI for astronomy**, demonstrating:
+
+- systematic identification of bias in human-labeled datasets,
+- principled debiasing through modified likelihood-based loss functions,
+- improved robustness across diverse observational settings,
+- scalable pixel-to-physics inference frameworks for galaxy evolution studies.
+
+The methodology generalizes to **remote sensing**, **medical imaging**, and other fields where expert labels contain hidden systematic bias.
+
+---
+
+## CONTACT
+
+For collaboration or questions regarding the method:
+**Lufan Wang**  
+Email: [lufanw@uw.edu](mailto:lufanw@uw.edu)  
+University of Washington
