@@ -1,0 +1,2 @@
+weights,accuracy,bias2014_true,bias2014_pred,bias2018_true,bias2018_pred
+best.weights.h5,0.6816565040650406,0.2879658635668893,0.0,1.6966251232067642,0.0

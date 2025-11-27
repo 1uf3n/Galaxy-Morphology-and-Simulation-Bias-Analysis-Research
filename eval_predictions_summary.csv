@@ -1,0 +1,2 @@
+predictions_file,rows_evaluated,accuracy,bias2014_true,bias2014_pred,bias2018_true,bias2018_pred
+predictions_small.csv,64,0.734375,0.2412800849645702,0.062133990655554874,0.0,0.0
